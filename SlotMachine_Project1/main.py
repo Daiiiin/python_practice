@@ -1,7 +1,5 @@
 import random
 
-# HELP
-
 MAX_LINES = 3
 MAX_BET = 500
 MIN_BET = 1
