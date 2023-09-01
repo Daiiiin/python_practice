@@ -1,3 +1,4 @@
-# python_practice
 
-### this is me trying to learn python
+# Python Exercises
+
+My journey in learning python
