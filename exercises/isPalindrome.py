@@ -6,11 +6,11 @@ def is_palindrome(s):
             end -= 1
             continue
         else:
-            print("The word " + s + " is NOT a palindrome")
-            break
-    else:
-        print("The word " + s + "is a palindrome")
+            return False
+    return True
 
+
+check = False
 
 while True:
     word = input("Enter a word: ")
@@ -18,5 +18,7 @@ while True:
         print("Please enter a word.")
     else:
         word = word.lower()
-        is_palindrome(word)
+        check = is_palindrome(word)
         break
+
+print("The word " + word + " is a palindrome: " + str(check))
