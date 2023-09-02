@@ -4,7 +4,6 @@ def is_palindrome(s):
     for i in range(0, int(length/2)):
         if s[i] == s[end]:
             end -= 1
-            continue
         else:
             return False
     return True
