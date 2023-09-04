@@ -6,7 +6,8 @@ def rock_paper_scissors_game():
 
     while True:
         user_choice = input("What is your move? ").lower()
-
+        if user_choice in choice:
+            break
 
 
 
