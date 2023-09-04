@@ -6,6 +6,7 @@ import random
 # player guess a letter
 # if guess is in word fill in blank
 # if guess is not in word NO_OF_LIVES - 1
+# place correct guesses in a list on the correct index
 
 
 def generate_word():
@@ -37,15 +38,28 @@ def find_letter_from_word(letter, word, lives):
     return idx_of_letter, lives
 
 
-no_of_lives = 5
+def main(lives):
+    gen_word = generate_word()
+    print(gen_word)
+    while lives != 0:  # second condition is guess != gen_word
+        # user inputted guess
+        guess = user_guess()
 
-# random generated word from txt file
-gen_word = generate_word()
-print(gen_word)
+        # finding letter in word
+        idx_list, lives = find_letter_from_word(guess, gen_word, lives)
+        print(idx_list, lives)
+
+
+no_of_lives = 5
+main(no_of_lives)
 
 # user inputted guess
-guess = user_guess()
+# guess = user_guess()
+
+# random generated word from txt file
+# gen_word = generate_word()
+# print(gen_word)
 
 # finding letter in word
-idx_list, no_of_lives = find_letter_from_word(guess, gen_word, no_of_lives)
-print(idx_list, no_of_lives)
+# idx_list, no_of_lives = find_letter_from_word(guess, gen_word, no_of_lives)
+# print(idx_list, no_of_lives)
