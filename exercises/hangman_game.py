@@ -1,7 +1,5 @@
 import random
 
-NO_OF_LIVES = 5
-
 # generate random word
 # number of lives = 5
 # no of blank lines == no of letters in words
@@ -24,7 +22,7 @@ def user_guess():
     return input("Guess a letter: ").lower()
 
 
-def find_letter_from_word(letter, word):
+def find_letter_from_word(letter, word, lives):
     no_of_letter = 0
     idx_of_letter = []
     if letter in word:
@@ -34,9 +32,12 @@ def find_letter_from_word(letter, word):
                 idx_of_letter.append(i)
     else:
         print(f"Your guess {letter} not found in word.")
+        lives -= 1
 
-    return idx_of_letter
+    return idx_of_letter, lives
 
+
+no_of_lives = 5
 
 # random generated word from txt file
 gen_word = generate_word()
@@ -46,5 +47,5 @@ print(gen_word)
 guess = user_guess()
 
 # finding letter in word
-idx_list = find_letter_from_word(guess, gen_word)
-print(idx_list)
+idx_list, no_of_lives = find_letter_from_word(guess, gen_word, no_of_lives)
+print(idx_list, no_of_lives)
