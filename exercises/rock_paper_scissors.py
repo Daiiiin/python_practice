@@ -18,15 +18,14 @@ def rock_paper_scissors_game():
 
     if user_choice == ai_choice:
         print("\nYou Tied!")
+    elif (
+            (user_choice == "rock" and ai_choice == "scissors") or
+            (user_choice == "paper" and ai_choice == "rock") or
+            (user_choice == "scissors" and ai_choice == "paper")
+    ):
+        print("\nYou Win!")
     else:
-        if user_choice == "rock" and ai_choice == "scissors":
-            print("\nYou Win!")
-        elif user_choice == "paper" and ai_choice == "rock":
-            print("\nYou Win!")
-        elif user_choice == "scissors" and ai_choice == "paper":
-            print("\nYou Win!")
-        else:
-            print("\nYou Lose!")
+        print("\nYou Lose!")
 
 
 print("Rock, Paper, or Scissors?")
