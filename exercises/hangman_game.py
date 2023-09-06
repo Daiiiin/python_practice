@@ -15,7 +15,7 @@ def generate_word():
         rand = random.randint(1, len(content))
         word = content[rand]
         fl.close()
-
+    # print(content)
     return word
 
 
@@ -46,36 +46,39 @@ def find_letter_from_word(letter, word, lives):
 
 def main(lives):
     user_word = ""
-    gen_word = generate_word()
-    print(gen_word)
-    blank_word = generate_blank_lines(gen_word)
+    ai_word = generate_word().strip()  # random generated word
+    print(ai_word)
+    blank_word = generate_blank_lines(ai_word)
 
-    while lives != 0 or gen_word != user_word:
-        # print blank lines and user lives
+    while lives != 0 or ai_word != user_word:
+        # print user lives
         print("Lives: " + str(lives))
+
         # concatenate list to check if word is formed
         user_word = ''.join(blank_word)
-        print(user_word)
 
-        # user inputted guess
-        guess = user_guess()
+        break
 
-        # finding letter in word
-        idx_list, lives = find_letter_from_word(guess, gen_word, lives)
-        # print(idx_list, lives)
-
-        # if letter found, change blank line/s to letter
-        if len(idx_list) == 0:
-            print(f"Your guess {guess} not found in word.")
-            lives -= 1
-        else:
-            for i in range(len(idx_list)):
-                blank_word[idx_list[i]] = guess
+        #
+        # # user inputted guess
+        # guess = user_guess()
+        #
+        # # finding letter in word
+        # idx_list, lives = find_letter_from_word(guess, ai_word, lives)
+        # # print(idx_list, lives)
+        #
+        # # if letter found, change blank line/s to letter
+        # if len(idx_list) == 0:
+        #     print(f"Your guess {guess} not found in word.")
+        #     lives -= 1
+        # else:
+        #     for i in range(len(idx_list)):
+        #         blank_word[idx_list[i]] = guess
 
         # print("User: " + user_word)
         # print("Length user: " + str(len(user_word)))
-        # print("AI: " + gen_word)
-        # print("Length AI: " + str(len(gen_word)))
+        # print("AI: " + ai_word)
+        # print("Length AI: " + str(len(ai_word)))
 
 
 no_of_lives = 5
