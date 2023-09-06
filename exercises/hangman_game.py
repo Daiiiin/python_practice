@@ -22,7 +22,7 @@ def generate_word():
 def generate_blank_lines(ai_word):
     word_len = len(ai_word)
     blank_lines = []
-    for _ in range(word_len - 1):
+    for _ in range(word_len):
         blank_lines.append("_")
 
     return blank_lines
@@ -46,39 +46,40 @@ def find_letter_from_word(letter, word, lives):
 
 def main(lives):
     user_word = ""
-    ai_word = generate_word().strip()  # random generated word
+    # random generated word
+    ai_word = generate_word().strip()
     print(ai_word)
     blank_word = generate_blank_lines(ai_word)
 
-    while lives != 0 or ai_word != user_word:
+    while lives != 0:
         # print user lives
         print("Lives: " + str(lives))
 
         # concatenate list to check if word is formed
         user_word = ''.join(blank_word)
 
-        break
+        # print lines
+        print(user_word)
 
-        #
-        # # user inputted guess
-        # guess = user_guess()
-        #
-        # # finding letter in word
-        # idx_list, lives = find_letter_from_word(guess, ai_word, lives)
-        # # print(idx_list, lives)
-        #
-        # # if letter found, change blank line/s to letter
-        # if len(idx_list) == 0:
-        #     print(f"Your guess {guess} not found in word.")
-        #     lives -= 1
-        # else:
-        #     for i in range(len(idx_list)):
-        #         blank_word[idx_list[i]] = guess
+        # user inputted guess
+        guess = user_guess()
 
-        # print("User: " + user_word)
-        # print("Length user: " + str(len(user_word)))
-        # print("AI: " + ai_word)
-        # print("Length AI: " + str(len(ai_word)))
+        # finding letter in word
+        idx_list, lives = find_letter_from_word(guess, ai_word, lives)
+        # print(idx_list, lives)
+
+        # if letter found, change blank line/s to letter
+        if len(idx_list) == 0:
+            print(f"Your guess {guess} not found in word.")
+            lives -= 1
+        else:
+            for i in range(len(idx_list)):
+                blank_word[idx_list[i]] = guess
+
+        if user_word == ai_word:
+            break
+
+        print("\n")
 
 
 no_of_lives = 5
