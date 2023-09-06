@@ -27,10 +27,6 @@ def generate_blank_lines(ai_word):
     return blank_lines
 
 
-def user_guess():
-    return input("Guess a letter: ").lower()
-
-
 def find_letter_from_word(letter, word, lives):
     no_of_letter = 0
     idx_of_letter = []
@@ -44,7 +40,6 @@ def find_letter_from_word(letter, word, lives):
 
 
 def main(lives):
-    user_word = ""
     # random generated word
     ai_word = generate_word().strip()
     print(ai_word)
@@ -52,7 +47,7 @@ def main(lives):
 
     while lives != 0:
         # print user lives
-        print("Lives: " + str(lives))
+        print("\nLives: " + str(lives))
 
         # concatenate list to check if word is formed
         user_word = ''.join(blank_word)
@@ -60,8 +55,13 @@ def main(lives):
         # print lines
         print(user_word)
 
+        # check if user has won
+        if user_word == ai_word:
+            print("\nYou Win!")
+            break
+
         # user inputted guess
-        guess = user_guess()
+        guess = input("Guess a letter: ").lower()
 
         # finding letter in word
         idx_list, lives = find_letter_from_word(guess, ai_word, lives)
@@ -74,11 +74,8 @@ def main(lives):
         else:
             for i in range(len(idx_list)):
                 blank_word[idx_list[i]] = guess
-
-        if user_word == ai_word:
-            break
-
-        print("\n")
+    else:
+        print("\nYou Lose!")
 
 
 no_of_lives = 5
