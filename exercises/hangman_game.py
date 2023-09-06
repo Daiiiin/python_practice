@@ -28,12 +28,10 @@ def generate_blank_lines(ai_word):
 
 
 def find_letter_from_word(letter, word, lives):
-    no_of_letter = 0
     idx_of_letter = []
     if letter in word:
         for i in range(len(word)):
             if word[i] == letter:
-                no_of_letter += 1
                 idx_of_letter.append(i)
 
     return idx_of_letter, lives
@@ -74,7 +72,7 @@ def main(lives):
             for i in range(len(idx_list)):
                 blank_word[idx_list[i]] = guess
     else:
-        print("\nYou Lose!")
+        print(f"\nThe word was {ai_word}.\nYou Lose!")
 
 
 no_of_lives = 5
