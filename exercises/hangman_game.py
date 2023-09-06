@@ -15,7 +15,7 @@ def generate_word():
         rand = random.randint(1, len(content))
         word = content[rand]
         fl.close()
-    # print(content)
+
     return word
 
 
