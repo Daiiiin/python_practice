@@ -15,8 +15,17 @@ def generate_word():
         rand = random.randint(1, len(content))
         word = content[rand]
         fl.close()
-
+    print(len(word))
     return word
+
+
+def generate_blank_lines(ai_word):
+    word_len = len(ai_word)
+    blank_lines = []
+    for _ in range(word_len - 1):
+        blank_lines.append("_")
+
+    return blank_lines
 
 
 def user_guess():
@@ -31,35 +40,45 @@ def find_letter_from_word(letter, word, lives):
             if word[i] == letter:
                 no_of_letter += 1
                 idx_of_letter.append(i)
-    else:
-        print(f"Your guess {letter} not found in word.")
-        lives -= 1
 
     return idx_of_letter, lives
 
 
 def main(lives):
+    user_word = ""
     gen_word = generate_word()
     print(gen_word)
-    while lives != 0:  # second condition is guess != gen_word
+    blank_word = generate_blank_lines(gen_word)
+
+    while lives != 0 or gen_word != user_word:
+        # print blank lines and user lives
+        print("Lives: " + str(lives))
+        # concatenate list to check if word is formed
+        user_word = ''.join(blank_word)
+        print(user_word)
+
         # user inputted guess
         guess = user_guess()
 
         # finding letter in word
         idx_list, lives = find_letter_from_word(guess, gen_word, lives)
-        print(idx_list, lives)
+        # print(idx_list, lives)
+
+        # if letter found, change blank line/s to letter
+        if len(idx_list) == 0:
+            print(f"Your guess {guess} not found in word.")
+            lives -= 1
+        else:
+            for i in range(len(idx_list)):
+                blank_word[idx_list[i]] = guess
+
+        # print("User: " + user_word)
+        # print("Length user: " + str(len(user_word)))
+        # print("AI: " + gen_word)
+        # print("Length AI: " + str(len(gen_word)))
 
 
 no_of_lives = 5
 main(no_of_lives)
 
-# user inputted guess
-# guess = user_guess()
-
-# random generated word from txt file
-# gen_word = generate_word()
-# print(gen_word)
-
-# finding letter in word
-# idx_list, no_of_lives = find_letter_from_word(guess, gen_word, no_of_lives)
-# print(idx_list, no_of_lives)
+# word2 = ''.join(var_nam)
