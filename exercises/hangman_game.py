@@ -42,7 +42,6 @@ def find_letter_from_word(letter, word, lives):
 def main(lives):
     # random generated word
     ai_word = generate_word().strip()
-    print(ai_word)
     blank_word = generate_blank_lines(ai_word)
 
     while lives != 0:
