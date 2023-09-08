@@ -1,19 +1,11 @@
 import random
 
-# generate random word
-# number of lives = 5
-# no of blank lines == no of letters in words
-# player guess a letter
-# make list of blank lines, no_of_blank_lines == to length of random word - 1
-# if guess is in word replace blank line on the proper index
-# if guess is not in word NO_OF_LIVES - 1
-
 
 def generate_word():
     with open("../text_files/hangman_words.txt", "r") as fl:
         content = fl.readlines()
-        word = random.choice(content)
-        fl.close()
+
+    word = random.choice(content)
 
     return word
 
