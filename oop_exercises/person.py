@@ -11,6 +11,7 @@ class Person:
         return 100 - int(self.age)
 
 
+# Child of person class
 class Student(Person):
     def __init__(self, name, age, student_id):
         super().__init__(name, age)
@@ -19,6 +20,7 @@ class Student(Person):
     def display_student(self):
         print("Student ID: " + self.student_id)
         super().display_person()
+
 
 print("PERSON")
 input_name = input("What is your name? ")
