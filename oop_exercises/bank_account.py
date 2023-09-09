@@ -50,7 +50,7 @@ def account_methods(opened_account):
     print("\n1. Check Balance\n2. Deposit Money\n3. Withdraw Money")
     step_2 = input("\nWhat would you like to do? ")
     if step_2 == "1":
-        opened_account.check_balance()
+        opened_account.check_balance(opened_account.balance)
     elif step_2 == "2":
         opened_account.deposit_money()
     elif step_2 == "3":
