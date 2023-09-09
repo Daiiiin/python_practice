@@ -5,7 +5,6 @@ with open("../text_files/file_practice.txt", "w") as f:
     myList = ["Apple", "Orange", "Banana", "Grapes", "Watermelon"]
     for x in myList:
         f.write(x + "\n")
-    f.close()
 
 rand = random.randint(1, len(myList))
 
@@ -22,5 +21,4 @@ with open("../text_files/file_practice.txt", "r") as f:
     # print(rand)
     # print(myList)
     # print(type(line))
-    f.close()
 

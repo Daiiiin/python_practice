@@ -1,40 +1,98 @@
 from classes.bank_account_classes import BankAccount
+import pickle
+import uuid
 
-def main(account):
-    print("\n1. Check Balance\n2. Deposit Money\n3. Withdraw Money")
-    choose = int(input("What would you like to do (1,2,3)? "))
-    if choose == 1:
-        account.check_balance()
-    elif choose == 2:
-        account.deposit_money()
-    elif choose == 3:
-        account.withdraw_money()
+
+# with open("../text_files/bank_account_details.pkl", "wb") as write_file:
+#     pickle.dump(account_1, write_file, pickle.HIGHEST_PROTOCOL)
+
+# with open("../text_files/bank_account_details.pkl", "rb") as read_file:
+#     account_info = pickle.load(read_file)
+#     print(account_info.account_id)
+#     print(account_info.account_holder)
+#     print(account_info.balance)
+
+# account_list = []
+# with open("../text_files/bank_account_details.pkl", "rb") as open_file:
+#     try:
+#         account_list = pickle.load(open_file)
+#     except EOFError:
+#         print("Account does not exists. Empty")
+
+# a_id = uuid.uuid4()
+# a_name = str(input("Name: "))
+# a_username = str(input("Username: "))
+# a_password = str(input("Password: "))
+#
+# account_3 = BankAccount(a_id, a_username, a_password, a_name, 0)
+#
+# account_list.append(account_3)
+#
+# print("--------NEW----------")
+#
+# with open("../text_files/bank_account_details.pkl", "wb") as open_file:
+#     pickle.dump(account_list, open_file, pickle.HIGHEST_PROTOCOL)
+#
+# with open("../text_files/bank_account_details.pkl", "rb") as open_file:
+#     account_list = pickle.load(open_file)
+#
+# for i in range(len(account_list)):
+#         print(account_list[i].username)
+
+def create_bank_account():
+    account_list = []
+    with open("../text_files/bank_account_details.pkl", "rb") as open_file:
+        try:
+            account_list = pickle.load(open_file)
+        except EOFError:
+            pass
+
+    account_id = uuid.uuid4()
+    account_name = str(input("Enter your name: "))
+    account_username = str(input("Enter a username: "))
+    account_password = str(input("Enter a password: "))
+
+    new_account = BankAccount(account_id, account_username, account_password, account_name, 0)
+    account_list.append(new_account)
+
+    with open("../text_files/bank_account_details.pkl", "wb") as open_file:
+        try:
+            pickle.dump(account_list, open_file, pickle.HIGHEST_PROTOCOL)
+        except EOFError:
+            pass
+
+
+def open_existing_account(username):
+    with open("../text_files/bank_account_details.pkl", "rb") as open_file:
+        try:
+            account_list = pickle.load(open_file)
+            for i in range(len(account_list) - 1):
+                print("Length: " + str(len(account_list)))
+                print("Type: " + str(type(account_list)))
+                if username == account_list[i].username:
+                    return account_list[i]
+                else:
+                    return 0
+        except EOFError:
+            print("Account does not exists. Empty")
+
+def main():
+    print("1. Create Account\n2. Open Account")
+    step_1 = int(input("\nWhat would you like to do? "))
+    if step_1 == 1:
+        # create new account()
+        create_bank_account()
+    elif step_1 == 2:
+        # open existing account
+        input_username = str(input("Enter your username: "))
+        opened_account = open_existing_account(input_username)
+        # print(type(opened_account))
+        if opened_account != 0:
+            print(opened_account.account_holder)
+        else:
+            print("Account does not exists.")
     else:
-        pass
+        print("Invalid Input.")
 
 
-account_1 = BankAccount("10001", "Matthew Desabelle", 1000)
-account_2 = BankAccount("10002", "Sam Abrigos", 1000)
-account_3 = BankAccount("10003", "Joshua Soqueno", 1000)
-account_4 = BankAccount("10004", "Neil Torre", 1000)
-account_5 = BankAccount("10005", "Tricia Alcisto", 1000)
-
-# User open their account
-user_account = str(input("Enter your account ID: "))
-if user_account == account_1.account_id:
-    account_1.account_details()
-    main(account_1)
-elif user_account == account_2.account_id:
-    account_2.account_details()
-    main(account_2)
-elif user_account == account_3.account_id:
-    account_3.account_details()
-    main(account_3)
-elif user_account == account_4.account_id:
-    account_4.account_details()
-    main(account_4)
-elif user_account == account_5.account_id:
-    account_5.account_details()
-    main(account_5)
-else:
-    print("The account does not exist.")
+# main()

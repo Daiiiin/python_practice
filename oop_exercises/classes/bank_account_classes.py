@@ -1,6 +1,9 @@
 class BankAccount:
-    def __init__(self, account_id, account_holder, balance):
+
+    def __init__(self, account_id, username, password, account_holder, balance):
         self.account_id = account_id
+        self.username = username
+        self.password = password
         self.account_holder = account_holder
         self.balance = balance
 
