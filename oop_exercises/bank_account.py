@@ -39,6 +39,14 @@ import uuid
 # for i in range(len(account_list)):
 #         print(account_list[i].username)
 
+# print("----Specific----")
+#
+# for i in range(len(account_list)):
+#     if account_list[i].username == "mar":
+#         print(account_list[i].username)
+#     else:
+#         print("not here")
+
 def create_bank_account():
     account_list = []
     with open("../text_files/bank_account_details.pkl", "rb") as open_file:
@@ -56,37 +64,42 @@ def create_bank_account():
     account_list.append(new_account)
 
     with open("../text_files/bank_account_details.pkl", "wb") as open_file:
-        try:
-            pickle.dump(account_list, open_file, pickle.HIGHEST_PROTOCOL)
-        except EOFError:
-            pass
+        pickle.dump(account_list, open_file, pickle.HIGHEST_PROTOCOL)
+        # try:
+        #     pickle.dump(account_list, open_file, pickle.HIGHEST_PROTOCOL)
+        # except EOFError:
+        #     pass
 
 
 def open_existing_account(username):
     with open("../text_files/bank_account_details.pkl", "rb") as open_file:
         try:
             account_list = pickle.load(open_file)
-            for i in range(len(account_list) - 1):
-                print("Length: " + str(len(account_list)))
-                print("Type: " + str(type(account_list)))
-                if username == account_list[i].username:
-                    return account_list[i]
+            for i in range(len(account_list)):
+                if account_list[i].username == username:
+                    return BankAccount(account_list[i].account_id,
+                                       account_list[i].username,
+                                       account_list[i].password,
+                                       account_list[i].account_holder,
+                                       account_list[i].balance)
                 else:
-                    return 0
+                    continue
+            else:
+                return 0
         except EOFError:
             print("Account does not exists. Empty")
 
+
 def main():
     print("1. Create Account\n2. Open Account")
-    step_1 = int(input("\nWhat would you like to do? "))
-    if step_1 == 1:
+    step_1 = input("\nWhat would you like to do? ")
+    if step_1 == "1":
         # create new account()
         create_bank_account()
-    elif step_1 == 2:
+    elif step_1 == "2":
         # open existing account
         input_username = str(input("Enter your username: "))
         opened_account = open_existing_account(input_username)
-        # print(type(opened_account))
         if opened_account != 0:
             print(opened_account.account_holder)
         else:
@@ -95,4 +108,19 @@ def main():
         print("Invalid Input.")
 
 
-# main()
+main()
+
+
+# with open("../text_files/bank_account_details.pkl", "rb") as open_file:
+#     account_list = pickle.load(open_file)
+#
+# for i in range(len(account_list)):
+#     print(account_list[i].username)
+#
+# print("----Specific----")
+#
+# for i in range(len(account_list)):
+#     if account_list[i].username == "bilat":
+#         print(account_list[i].username)
+#     else:
+#         print("not here")
